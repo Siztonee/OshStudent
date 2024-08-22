@@ -18,4 +18,14 @@ class Group extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function curator()
+    {
+        return $this->belongsTo(User::class, 'curator_id')->whereIn('role', ['teacher', 'admin']);
+    }
+
+    public function headman()
+    {
+        return $this->belongsTo(User::class, 'headman_id')->where('role', 'student');
+    }
 }

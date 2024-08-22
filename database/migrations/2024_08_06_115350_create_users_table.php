@@ -14,19 +14,28 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('login');
+
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
+
             $table->string('password');
             $table->string('profile');
-            $table->foreignId('group_id')->constrained()->onDelete('cascade');
-            $table->string('year_of_study');
-            $table->string('specialization');
-            $table->unsignedInteger('tuition_paid');
+
+            $table->unsignedBigInteger('group_id')->nullable();
+
+            $table->string('year_of_study')->nullable();
+
+            $table->unsignedInteger('score')->default(0);
+
             $table->enum('role', ['student', 'teacher', 'admin'])->default('student');
             $table->enum('theme', ['light', 'dark'])->default('light');
+
+            $table->string('specialization')->nullable();
+
             $table->boolean('is_activated')->default(true);
             $table->boolean('is_health_check_complete')->default(false);
+
             $table->timestamps();
         });
 

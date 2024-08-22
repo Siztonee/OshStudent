@@ -5,13 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class Grade extends Model
 {
     use HasFactory;
 
-    public function group()
+    protected $fillable = [
+        'student_id',
+        'teacher_id',
+        'subject_id',
+        'day',
+        'month',
+        'year',
+        'grade',
+    ];
+
+    public function student()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(User::class);
     }
 
     public function teacher()
@@ -23,4 +33,5 @@ class Schedule extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
 }

@@ -13,15 +13,27 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('group_id')
                 ->constrained('groups')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->unsignedTinyInteger('day_of_week'); // 1-7
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->foreignId('subject_id')
+                ->constrained('subjects')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->foreignId('teacher_id')
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedTinyInteger('day_of_week'); // 1-6
+
             $table->time('start_time'); // 8:00
             $table->time('end_time');   // 13:10
-            $table->string('subject');
-            $table->string('teacher');
+
             $table->string('room'); // 1 - 55
             $table->timestamps();
         });

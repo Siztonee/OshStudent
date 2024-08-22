@@ -49,4 +49,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class);
+    }
 }

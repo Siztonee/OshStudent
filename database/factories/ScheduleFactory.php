@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,16 +24,7 @@ class ScheduleFactory extends Factory
             '08:00:00', '09:40:00', '11:35:00'
         ];
 
-        $subjects = [
-            'Математика', 'Физика', 'Химия', 'Биология', 'История Кыргызстана',
-            'География', 'Русская Литература', 'Английский язык', 'Русский язык',
-            'Верстка Веб-Сайтов', 'PHP', 'Операционные Системы', 'Дизайн'
-        ];
 
-        $teachers = [
-            'Mr. Smith', 'Mrs. Johnson', 'Mr. Williams', 'Ms. Brown', 'Mr. Jones',
-            'Mrs. Garcia', 'Mr. Miller', 'Ms. Davis', 'Mr. James', 'Mr. Teddy', 'Mrs. Maria'
-        ];
 
         $rooms = range(1, 55);
 
@@ -44,8 +36,7 @@ class ScheduleFactory extends Factory
                 $startTime = \Carbon\Carbon::createFromFormat('H:i:s', $attributes['start_time']);
                 return $startTime->addMinutes(95)->format('H:i:s');
             },
-            'subject' => $this->faker->randomElement($subjects),
-            'teacher' => $this->faker->randomElement($teachers),
+            'teacher_id' => User::where('role', 'teacher')->inRandomOrder()->first()->id,
             'room' => $this->faker->randomElement($rooms)
         ];
     }

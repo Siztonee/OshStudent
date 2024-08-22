@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,23 +11,32 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('grades', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('curator_id')
+            $table->foreignId('student_id')
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->foreignId('headman_id')
+            $table->foreignId('teacher_id')
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string('name');
-            $table->unsignedMediumInteger('total_score')->default(0);
+            $table->foreignId('subject_id')
+                ->constrained('subjects')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedSmallInteger('day');
+            $table->unsignedSmallInteger('month');
+            $table->unsignedSmallInteger('year');
+            $table->unsignedSmallInteger('grade');
 
             $table->timestamps();
+
+            $table->unique(['student_id', 'day', 'month', 'year']);
         });
     }
 
@@ -37,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('grades');
     }
 };
