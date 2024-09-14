@@ -10,7 +10,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
-    <body class="flex flex-col min-h-screen {{ auth()->user()->theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100' }}">
+
+    
+    <body class="flex flex-col min-h-screen {{ auth()->user() && auth()->user()->theme === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100' }}">
 
         @include('layouts.app-header')
 

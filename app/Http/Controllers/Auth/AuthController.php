@@ -17,8 +17,9 @@ class AuthController extends Controller
     public function auth(AuthRequest $request)
     {
         $data = $request->validated();
+        $remember = $request->has('remember');
 
-        if (Auth::attempt($data)) {
+        if (Auth::attempt($data, $remember)) {
             // Если аутентификация успешна, перенаправляем на домашнюю страницу
             return redirect()->intended(route('home', absolute: false));
         }

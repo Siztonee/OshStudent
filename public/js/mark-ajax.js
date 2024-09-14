@@ -51,24 +51,39 @@ function removeGradeInput() {
 }
 
 function onGradeInputChange(event) {
+    
+    console.log('starting ongradeinputchange function');
+
     const input = event.target;
     const studentId = input.dataset.studentId;
     const subjectId = input.dataset.subjectId;
     const teacherId = input.dataset.teacherId;
     const day = input.dataset.day;
-    const grade = input.value;
+    const mark = input.value;
 
-    updateGrade(studentId, subjectId, teacherId, day, grade);
+    console.log('before calling update func');
+
+    updateGrade(studentId, subjectId, teacherId, day, mark);
+
+    console.log('after');
 }
 
 function onGradeInputBlur(event) {
     removeGradeInput();
 }
 
-function updateGrade(studentId, subjectId, teacherId, day, grade) {
+function updateGrade(studentId, subjectId, teacherId, day, mark) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch('/update-grade', {
+    console.log('Sending request:', {
+        student_id: studentId,
+        subject_id: subjectId,
+        teacher_id: teacherId,
+        day: day,
+        mark: mark
+    });
+
+    fetch('/update-mark', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -79,19 +94,26 @@ function updateGrade(studentId, subjectId, teacherId, day, grade) {
             subject_id: subjectId,
             teacher_id: teacherId,
             day: day,
-            grade: grade
+            mark: mark
         })
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Обновляем значение в ячейке таблицы
-                const cell = document.querySelector(`.grade-cell[data-student-id="${studentId}"][data-day="${day}"]`);
-                if (cell) {
-                    cell.textContent = grade;
-                }
-            } else {
-                console.error('Ошибка при обновлении оценки');
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            const cell = document.querySelector(`.grade-cell[data-student-id="${studentId}"][data-day="${day}"]`);
+            if (cell) {
+                cell.textContent = mark;
             }
-        });
+        } else {
+            console.error('Ошибка при обновлении оценки');
+        }
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 }

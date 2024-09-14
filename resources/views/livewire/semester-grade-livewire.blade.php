@@ -18,10 +18,9 @@
                     <option value="{{ $year }}">{{ $year }}</option>
                 @endfor
             </select>
-            <select wire:model.lazy="selectedMonth" class="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                @foreach ($months as $index => $month)
-                    <option value="{{ $index }}">{{ $month }}</option>
-                @endforeach
+            <select wire:model.lazy="selectedSemester" class="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
             </select>
             <select wire:model.lazy="selectedGroup" class="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                 @foreach ($groups as $group)
@@ -36,28 +35,27 @@
             <thead>
             <tr class="bg-red-600 text-white">
                 <th class="py-3 px-4 text-left">Студент</th>
-                @for ($day = 1; $day <= 31; $day++)
-                    <th class="py-3 px-2 text-center">{{ $day }}</th>
-                @endfor
+                <th class="py-3 px-6 text-left">Оценка</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($students as $student)
                 <tr class="border-b hover:bg-gray-100">
-                    <td class="py-3 px-4 font-medium">{{ $student->last_name.' '.$student->first_name }}</td>
-                    @for ($day = 1; $day <= 31; $day++)
-                        <td class="py-1 px-1 text-center">
-                            <div class="relative">
-                                <div class="w-6 h-6 border rounded flex items-center justify-center cursor-pointer hover:bg-gray-100 grade-cell"
-                                     data-student-id="{{ $student->id }}"
-                                     data-subject-id="{{ $subjectId }}"
-                                     data-teacher-id="{{ auth()->id() }}"
-                                     data-day="{{ $day }}">
-                                    {{ $grades[$student->id][$day]->grade ?? '' }}
-                                </div>
+                    <td class="py-3 px-4 font-medium">
+                        {{ $student->last_name.' '.$student->first_name }}
+                    </td>
+
+                    <td class="py-1 px-1 text-center">
+                        <div class="relative">
+                            <div class="w-6 h-6 border rounded flex items-center justify-center cursor-pointer hover:bg-gray-100 grade-cell"
+                                    data-student-id="{{ $student->id }}"
+                                    data-subject-id="{{ $subjectId }}"
+                                    data-teacher-id="{{ auth()->id() }}"
+                                    data-semester="{{ $selectedSemester }}">
+                                {{ $grades[$student->id][0]['grade'] ?? '' }}
                             </div>
-                        </td>
-                    @endfor
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -66,5 +64,5 @@
 </div>
 
 @push('scripts')
-    <script src="{{ asset('js/grade-ajax.js') }}"></script>
+    <script src="{{ asset('js/semester-ajax.js') }}"></script>
 @endpush

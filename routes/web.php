@@ -1,19 +1,22 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\HealthCheckController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\Teachers\GradesController;
-use App\Http\Controllers\Teachers\SemesterController;
+use App\Livewire\VisitMark;
+use App\Livewire\GradesLivewire;
+use Illuminate\Support\Facades\Route;;
 use App\Http\Middleware\AuthMiddleware;
+use App\Livewire\SemesterGradeLivewire;
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\NotAuthMiddleware;
 use App\Http\Middleware\StudentsMiddleware;
 use App\Http\Middleware\TeachersMiddleware;
-use App\Livewire\GradesLivewire;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HealthCheckController;
+use App\Http\Controllers\Teachers\MarksController;
+use App\Http\Controllers\Teachers\GradesController;
+use App\Http\Controllers\Teachers\SemesterController;
+use App\Http\Controllers\Teachers\SemesterGradeController;
 
 Route::middleware(AuthMiddleware::class)->group(function () {
     Route::get('/', HomeController::class)->name('home');
@@ -31,6 +34,13 @@ Route::middleware([AuthMiddleware::class, TeachersMiddleware::class])->group(fun
     Route::get('/teacher-semester', [SemesterController::class, 'index'])->name('teachs.semester');
     Route::get('/teacher-grade', GradesLivewire::class)->name('teachs.grade');
     Route::post('/update-grade', GradesController::class)->name('teachs.update.grade');
+    Route::get('/visit-mark', VisitMark::class)->name('teachs.mark');
+    Route::post('/update-mark', MarksController::class)->name('teachs.update.mark');
+    Route::get('/semester-grade', SemesterGradeLivewire::class)->name('teachs.semester');
+    Route::post('/update-semester-grade', SemesterGradeController::class)->name('teachs.update.semester');
+    // Route::any('/update-semester-grade', function() {
+    //     return response()->json(['success' => true]);
+    // })->name('teachs.update.semester');
 });
 
 Route::middleware(NotAuthMiddleware::class)->group(function () {

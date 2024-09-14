@@ -2,21 +2,22 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use App\Models\Grade;
 use App\Models\Group;
 use App\Models\Subject;
-use App\Models\User;
 use Livewire\Component;
+use App\Models\SemesterGrade;
 use Illuminate\Support\Collection;
 
-class GradesLivewire extends Component
+
+class SemesterGradeLivewire extends Component
 {
     public int $subjectId;
     public Collection $groups;
     public Collection $students;
-    public Collection $grades;
-    public array $months;
-    public int $selectedMonth;
+    public $grades;
+    public int $selectedSemester;
     public int $selectedYear;
     public $selectedGroup;
 
@@ -25,13 +26,7 @@ class GradesLivewire extends Component
         $teacherId = auth()->id();
         $this->subjectId = Subject::where('name', auth()->user()->specialization)->value('id');
         $this->groups = Group::whereHas('schedules', fn($query) => $query->where('teacher_id', $teacherId))->get();
-
-        $this->months = [
-            1 => 'Январь', 2 => 'Февраль', 3 => 'Март', 4 => 'Апрель', 5 => 'Май', 6 => 'Июнь',
-            7 => 'Июль', 8 => 'Август', 9 => 'Сентябрь', 10 => 'Октябрь', 11 => 'Ноябрь', 12 => 'Декабрь'
-        ];
-
-        $this->selectedMonth = now()->month;
+        $this->selectedSemester = 1;
         $this->selectedYear = now()->year;
         $this->selectedGroup = $this->groups->isNotEmpty() ? $this->groups->first()->id : null;
 
@@ -47,17 +42,17 @@ class GradesLivewire extends Component
                 ->get()
             : collect();
 
-        $this->grades = Grade::where('month', $this->selectedMonth)
+        $this->grades = SemesterGrade::where('semester', $this->selectedSemester)
             ->where('year', $this->selectedYear)
             ->where('subject_id', $this->subjectId)
             ->get()
             ->groupBy('student_id')
-            ->map->keyBy('day');
+            ->collect();
     }
 
-    public function updatedSelectedMonth($value)
+    public function updatedSelectedSemester($value)
     {
-        $this->selectedMonth = $value ? $value : now()->month;
+        $this->selectedSemester = $value ? $value : 1;
         $this->loadJournal();
     }
 
@@ -74,8 +69,10 @@ class GradesLivewire extends Component
         $this->loadJournal();
     }
 
+
+
     public function render()
     {
-        return view('livewire.grades-livewire')->extends('layouts.app');
+        return view('livewire.semester-grade-livewire')->extends('layouts.app');
     }
 }

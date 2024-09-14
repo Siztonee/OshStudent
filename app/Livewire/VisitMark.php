@@ -2,23 +2,24 @@
 
 namespace App\Livewire;
 
-use App\Models\Grade;
-use App\Models\Group;
-use App\Models\Subject;
-use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Collection;
+use App\Models\Subject;
+use App\Models\Group;
+use App\Models\User;
+use App\Models\Mark;
 
-class GradesLivewire extends Component
+class VisitMark extends Component
 {
     public int $subjectId;
     public Collection $groups;
     public Collection $students;
-    public Collection $grades;
+    public Collection $marks;
     public array $months;
     public int $selectedMonth;
     public int $selectedYear;
     public $selectedGroup;
+
 
     public function mount()
     {
@@ -47,13 +48,14 @@ class GradesLivewire extends Component
                 ->get()
             : collect();
 
-        $this->grades = Grade::where('month', $this->selectedMonth)
+        $this->marks = Mark::where('month', $this->selectedMonth)
             ->where('year', $this->selectedYear)
             ->where('subject_id', $this->subjectId)
             ->get()
             ->groupBy('student_id')
             ->map->keyBy('day');
     }
+
 
     public function updatedSelectedMonth($value)
     {
@@ -74,8 +76,9 @@ class GradesLivewire extends Component
         $this->loadJournal();
     }
 
+
     public function render()
     {
-        return view('livewire.grades-livewire')->extends('layouts.app');
+        return view('livewire.visit-mark')->extends('layouts.app');
     }
 }

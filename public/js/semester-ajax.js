@@ -37,7 +37,7 @@ function createGradeInput(cell) {
     input.dataset.studentId = cell.dataset.studentId;
     input.dataset.subjectId = cell.dataset.subjectId;
     input.dataset.teacherId = cell.dataset.teacherId;
-    input.dataset.day = cell.dataset.day;
+    input.dataset.semester = cell.dataset.semester;
     input.addEventListener('change', onGradeInputChange);
     input.addEventListener('blur', onGradeInputBlur);
     container.innerHTML = '';
@@ -51,24 +51,35 @@ function removeGradeInput() {
 }
 
 function onGradeInputChange(event) {
+
+    console.log('starting ongradeinputchange function');
+
     const input = event.target;
     const studentId = input.dataset.studentId;
     const subjectId = input.dataset.subjectId;
     const teacherId = input.dataset.teacherId;
-    const day = input.dataset.day;
+    const semester = input.dataset.semester;
     const grade = input.value;
 
-    updateGrade(studentId, subjectId, teacherId, day, grade);
+    updateGrade(studentId, subjectId, teacherId, semester, grade);
 }
 
 function onGradeInputBlur(event) {
     removeGradeInput();
 }
 
-function updateGrade(studentId, subjectId, teacherId, day, grade) {
+function updateGrade(studentId, subjectId, teacherId, semester, grade) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch('/update-grade', {
+    console.log('Sending request:', {
+        student_id: studentId,
+        subject_id: subjectId,
+        teacher_id: teacherId,
+        semester: semester,
+        grade: grade
+    });
+
+    fetch('/update-semester-grade', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -78,20 +89,31 @@ function updateGrade(studentId, subjectId, teacherId, day, grade) {
             student_id: studentId,
             subject_id: subjectId,
             teacher_id: teacherId,
-            day: day,
+            semester: semester,
             grade: grade
         })
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Обновляем значение в ячейке таблицы
-                const cell = document.querySelector(`.grade-cell[data-student-id="${studentId}"][data-day="${day}"]`);
-                if (cell) {
-                    cell.textContent = grade;
-                }
-            } else {
-                console.error('Ошибка при обновлении оценки');
+    .then(response => {
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        return response.text();
+    })
+    .then(text => {
+        console.log('Raw response:', text);
+        return JSON.parse(text);
+    })
+    .then(data => {
+        console.log('Parsed data:', data);
+        if (data.success) {
+            const cell = document.querySelector(`.grade-cell[data-student-id="${studentId}"][data-semester="${semester}"]`);
+            if (cell) {
+                cell.textContent = grade;
             }
-        });
+        } else {
+            console.error('Ошибка при обновлении оценки');
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
 }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('semester_grades', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('student_id')
@@ -29,14 +29,11 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedSmallInteger('day');
-            $table->unsignedSmallInteger('month');
-            $table->unsignedSmallInteger('year');
             $table->unsignedSmallInteger('grade');
+            $table->unsignedSmallInteger('year');
+            $table->enum('semester', [1, 2]);
 
             $table->timestamps();
-
-            $table->unique(['student_id', 'subject_id', 'day', 'month', 'year']);
         });
     }
 
@@ -45,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grades');
+        Schema::dropIfExists('semester_grades');
     }
 };

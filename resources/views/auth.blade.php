@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Авторизация - {{ env('app_name') }}</title>
+@extends('layouts.app')
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title')
+    Авторизация
+@endsection
 
-    </head>
-    <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+@section('content')
+    <div class="bg-gray-100 flex items-center justify-center mt-4">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
             <h2 class="text-3xl font-bold text-center text-red-600 mb-6">Вход</h2>
 
@@ -31,12 +28,17 @@
                     <input type="text" id="login" name="login" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-6 relative">
                     <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Пароль:</label>
-                    <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                    <button id="togglePassword" type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2">
-                        <input type="checkbox" name="show_hide">
-                    </button>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-150 ease-in-out" required>
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-600 focus:outline-none hsPassword">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="flex items-center justify-between mb-6">
@@ -53,9 +55,9 @@
             </form>
 
         </div>
-    </body>
+    </div>
+@endsection
 
-    <script src="{{ asset('js/hide-show.js') }}"></script>
-
-
-</html>
+@push('scripts')
+    <script src="{{ asset('js/hide-show.js?v=1.0.4') }}"></script>
+@endpush

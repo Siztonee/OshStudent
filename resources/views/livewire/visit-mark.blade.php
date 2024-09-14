@@ -1,12 +1,9 @@
-
-
-@section('title') Оценка @endsection
-
+@section('title') Отметка посещения @endsection
 
 <div class="container mx-auto px-4 py-8">
     <div class="flex flex-wrap items-center justify-between mb-8">
         <div class="flex items-center">
-            <h1 class="text-3xl font-bold text-red-700 mr-4">Журнал оценок</h1>
+            <h1 class="text-3xl font-bold text-red-700 mr-4">Отметка посещения студента</h1>
             <div id="grade-input-container"></div>
             <div wire:loading>
                 <span>Загрузка...</span>
@@ -53,7 +50,7 @@
                                      data-subject-id="{{ $subjectId }}"
                                      data-teacher-id="{{ auth()->id() }}"
                                      data-day="{{ $day }}">
-                                    {{ $grades[$student->id][$day]->grade ?? '' }}
+                                    {{ $marks[$student->id][$day]->mark ?? '' }}
                                 </div>
                             </div>
                         </td>
@@ -65,6 +62,7 @@
     </div>
 </div>
 
+
 @push('scripts')
-    <script src="{{ asset('js/grade-ajax.js') }}"></script>
+    <script src="{{ asset('js/mark-ajax.js') }}"></script>
 @endpush
