@@ -25,7 +25,9 @@
             @if(auth()->user()->role == 'student')
                 @include('layouts.score')
             @elseif(auth()->user()->role == 'teacher')
-                @include('layouts.next-lesson')
+                <livewire:components.next-lesson>
+            @elseif(auth()->user()->role == 'admin')
+                @include('admin.admin-panel')
             @endif
         </div>
     </div>

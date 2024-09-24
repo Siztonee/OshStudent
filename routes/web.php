@@ -2,10 +2,13 @@
 
 use App\Livewire\VisitMark;
 use App\Livewire\GradesLivewire;
+use App\Livewire\Admin\GroupLivewire;
+use App\Livewire\Admin\GroupsLivewire;
 use Illuminate\Support\Facades\Route;;
 use App\Http\Middleware\AuthMiddleware;
 use App\Livewire\SemesterGradeLivewire;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\AdminsMiddleware;
 use App\Http\Middleware\NotAuthMiddleware;
 use App\Http\Middleware\StudentsMiddleware;
 use App\Http\Middleware\TeachersMiddleware;
@@ -36,11 +39,8 @@ Route::middleware([AuthMiddleware::class, TeachersMiddleware::class])->group(fun
     Route::post('/update-grade', GradesController::class)->name('teachs.update.grade');
     Route::get('/visit-mark', VisitMark::class)->name('teachs.mark');
     Route::post('/update-mark', MarksController::class)->name('teachs.update.mark');
-    Route::get('/semester-grade', SemesterGradeLivewire::class)->name('teachs.semester');
+    Route::get('/semester-grade', SemesterGradeLivewire::class)->name('teachs.semester.grade');
     Route::post('/update-semester-grade', SemesterGradeController::class)->name('teachs.update.semester');
-    // Route::any('/update-semester-grade', function() {
-    //     return response()->json(['success' => true]);
-    // })->name('teachs.update.semester');
 });
 
 Route::middleware(NotAuthMiddleware::class)->group(function () {
@@ -48,3 +48,7 @@ Route::middleware(NotAuthMiddleware::class)->group(function () {
     Route::post('/auth', [AuthController::class, 'auth'])->name('auth.auth');
 });
 
+Route::middleware(AdminsMiddleware::class)->group(function () {
+    Route::get('/groups', GroupsLivewire::class)->name('admins.groups');
+    Route::get('/group/{id}', GroupLivewire::class)->name('admins.group');
+});

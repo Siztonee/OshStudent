@@ -30,7 +30,7 @@
                 <!-- Оценки за семестр -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
                     <div class="bg-red-600 text-white py-4 px-6">
-                        <a href="{{ route('teachs.semester') }}"><h2 class="text-2xl font-semibold">Оценки за семестр</h2></a>
+                        <a href="{{ route('teachs.semester.grade') }}"><h2 class="text-2xl font-semibold">Оценки за семестр</h2></a>
                     </div>
                     <div class="p-6 flex items-center">
                         <p class="text-gray-700">Выставление и просмотр итоговых оценок за семестр.</p>
