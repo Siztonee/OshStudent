@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\Teachers\MarksController;
 use App\Http\Controllers\Teachers\GradesController;
+use App\Http\Controllers\Admin\CreateGroupController;
 use App\Http\Controllers\Teachers\SemesterController;
 use App\Http\Controllers\Teachers\SemesterGradeController;
 
@@ -51,4 +52,6 @@ Route::middleware(NotAuthMiddleware::class)->group(function () {
 Route::middleware(AdminsMiddleware::class)->group(function () {
     Route::get('/groups', GroupsLivewire::class)->name('admins.groups');
     Route::get('/group/{id}', GroupLivewire::class)->name('admins.group');
+    Route::get('/groups/create', [CreateGroupController::class, 'index'])->name('admins.groups.create');
+    Route::post('/groups/create', [CreateGroupController::class, 'create'])->name('action.groups.create');
 });

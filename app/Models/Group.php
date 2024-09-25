@@ -9,6 +9,10 @@ class Group extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ]; 
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class);
