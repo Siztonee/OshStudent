@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;;
 use App\Http\Middleware\AuthMiddleware;
 use App\Livewire\SemesterGradeLivewire;
 use App\Http\Controllers\HomeController;
+use App\Livewire\Admin\StudentsLivewire;
+use App\Livewire\Admin\TeachersLivewire;
 use App\Http\Middleware\AdminsMiddleware;
 use App\Http\Middleware\NotAuthMiddleware;
 use App\Http\Middleware\StudentsMiddleware;
@@ -19,7 +21,10 @@ use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\Teachers\MarksController;
 use App\Http\Controllers\Teachers\GradesController;
 use App\Http\Controllers\Admin\CreateGroupController;
+use App\Http\Controllers\Admin\TeacherInfoController;
 use App\Http\Controllers\Teachers\SemesterController;
+use App\Http\Controllers\Admin\StudentsListController;
+use App\Http\Controllers\Admin\TeachersListController;
 use App\Http\Controllers\Teachers\SemesterGradeController;
 
 Route::middleware(AuthMiddleware::class)->group(function () {
@@ -54,4 +59,7 @@ Route::middleware(AdminsMiddleware::class)->group(function () {
     Route::get('/group/{id}', GroupLivewire::class)->name('admins.group');
     Route::get('/groups/create', [CreateGroupController::class, 'index'])->name('admins.groups.create');
     Route::post('/groups/create', [CreateGroupController::class, 'create'])->name('action.groups.create');
+    Route::get('/teachers', [TeachersListController::class, 'index'])->name('admins.teachers');
+    Route::get('/teacher/{id}', [TeacherInfoController::class, 'index'])->name('admins.teachers.info');
+    Route::get('/students', [StudentsListController::class, 'index'])->name('admins.students');
 });

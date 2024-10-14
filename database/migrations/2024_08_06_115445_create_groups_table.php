@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->unsignedMediumInteger('total_score')->default(0);
+            $table->unsignedTinyInteger('course');
 
             $table->timestamps();
         });

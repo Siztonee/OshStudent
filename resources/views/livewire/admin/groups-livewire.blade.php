@@ -34,6 +34,13 @@
                                 <p class="text-sm text-gray-600">Студентов: {{ count($group['users']) }}</p>
                             </a>
                         </div>
+                    @else
+                        <div class="group-item bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+                            <a href="{{ route('admins.group', $group['id']) }}">
+                                <h3 class="text-lg font-semibold">{{ $group['name'] }}</h3>
+                                <p class="text-sm text-red-600">Требуются правки</p>
+                            </a>
+                        </div>
                     @endif
                 @endforeach
             </div>

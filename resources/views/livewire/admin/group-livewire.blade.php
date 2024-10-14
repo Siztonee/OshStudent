@@ -24,25 +24,25 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Куратор</h3>
-                        <p class="text-gray-600">{{ $group['curator']['first_name'] }}</p>
+                        <p class="text-gray-600">{{ $group['curator']['first_name'] ?? 'Отсуствует' }}</p>
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Староста</h3>
-                        <p class="text-gray-600">{{ $group['headman']['first_name'] }}</p>
+                        <p class="text-gray-600">{{ $group['headman']['first_name'] ?? 'Отсуствует' }}</p>
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Рейтинг</h3>
-                        <p class="text-gray-600">4.5/5</p>
+                        <p class="text-gray-600">{{ $group['total_score'] }}</p>
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Курс</h3>
-                        <p class="text-gray-600">Математика</p>
+                        <p class="text-gray-600">{{ $group['course'] }}</p>
                     </div>
                 </div>
                 
                 <h2 class="text-xl font-bold mb-4">Список студентов</h2>
                 <div class="space-y-4">
-                    @foreach ($students as $student)
+                    @forelse ($students as $student)
                         <div class="bg-gray-100 rounded-lg p-4 flex justify-between items-center">
                             <h3 class="text-lg font-semibold">{{ $student['last_name'] .' '. $student['first_name'] }}</h3>
                             <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg">
@@ -51,7 +51,9 @@
                                 </svg>
                             </button>
                         </div>
-                    @endforeach
+                    @empty
+                        <p>Пусто</p>
+                    @endforelse
                 </div>
             </div>
         </div>

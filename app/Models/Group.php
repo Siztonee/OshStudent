@@ -10,7 +10,8 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'cource'
     ]; 
 
     public function schedules()

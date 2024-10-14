@@ -15,7 +15,7 @@
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Создать группу
                     </button>
-                    <a href="#" class="inline-block align-baseline font-bold text-sm text-red-500 hover:text-red-800">
+                    <a href="{{ route('admins.groups') }}" class="inline-block align-baseline font-bold text-sm text-red-500 hover:text-red-800">
                         Отмена
                     </a>
                 </div>
