@@ -15,9 +15,9 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        $totalUsers = 400; // Общее количество пользователей
-        $batchSize = 40; // Размер батча
-        $batchCount = $totalUsers / $batchSize; // Количество батчей
+        $totalUsers = 400; 
+        $batchSize = 40; 
+        $batchCount = $totalUsers / $batchSize; 
 
         for ($batch = 1; $batch <= $batchCount; $batch++) {
             $users = [];
@@ -29,15 +29,13 @@ class StudentSeeder extends Seeder
                     'last_name' => fake()->lastName(),
                     'login' => fake()->unique()->userName(),
                     'password' => Hash::make(123123123),
-                    'profile' => 'public/profiles/admin.png',
+                    'profile' => 'storage/profiles/default.jpg',
                     'role' => 'student',
-                    // 'group_id' => Group::inRandomOrder()->first()->id, // Можно добавить по мере необходимости
                 ];
             }
 
             User::insert($users);
 
-            // Optional: pause between batches to reduce load
              sleep(1);
         }
     }

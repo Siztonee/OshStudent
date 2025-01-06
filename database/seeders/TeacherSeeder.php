@@ -28,9 +28,9 @@ class TeacherSeeder extends Seeder
                     'first_name' => fake()->firstName(),
                     'middle_name' => fake()->firstName(),
                     'last_name' => fake()->lastName(),
-                    'login' => fake()->unique()->userName(), // Уникальный логин
+                    'login' => fake()->unique()->userName(),
                     'password' => Hash::make(123123123),
-                    'profile' => 'public/profiles/admin.png',
+                    'profile' => 'storage/profiles/default.jpg',
                     'specialization' => $subject,
                     'role' => 'teacher',
                 ]);

@@ -17,7 +17,7 @@ class HomeController extends Controller
         $language = 'ru';
         $pageSize = 9;
         $url = "https://newsapi.org/v2/everything?q={$query}&language={$language}&pageSize={$pageSize}&apiKey={$apiKey}";
-
+        
         try {
             $response = Http::get($url);
             $newsData = $response->json();

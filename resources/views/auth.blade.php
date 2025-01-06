@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="bg-gray-100 flex items-center justify-center mt-4">
-        <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-            <h2 class="text-3xl font-bold text-center text-red-600 mb-6">Вход</h2>
+    <div class="flex items-center justify-center mt-4">
+        <div class="dark:bg-gray-800 bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+            <h2 class="text-3xl font-bold text-center dark:text-gray-100 text-red-600 mb-6">Вход</h2>
 
             <form action="{{ route('auth.auth') }}" method="post">
                 @csrf
@@ -24,14 +24,14 @@
 
 
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Логин:</label>
-                    <input type="text" id="login" name="login" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                    <label for="email" class="block dark:text-gray-100 text-gray-700 text-sm font-bold mb-2">Логин:</label>
+                    <input type="text" id="login" name="login" class="w-full px-3 py-2 border dark:border-gray-600 border-gray-300 rounded-md text-gray-600" required>
                 </div>
 
                 <div class="mb-6 relative">
-                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Пароль:</label>
+                    <label for="password" class="block dark:text-gray-100 text-gray-700 text-sm font-bold mb-2">Пароль:</label>
                     <div class="relative">
-                        <input type="password" id="password" name="password" class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-150 ease-in-out" required>
+                        <input type="password" id="password" name="password" class="w-full px-4 py-2 pr-10 border dark:border-gray-600 border-gray-300 rounded-md text-gray-600" required>
                         <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-600 focus:outline-none hsPassword">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -44,11 +44,11 @@
                 <div class="flex items-center justify-between mb-6">
                     <div>
                         <input type="checkbox" id="remember" name="remember" class="mr-2">
-                        <label for="remember" class="text-sm text-gray-600">Запомнить меня</label>
+                        <label for="remember" class="text-sm dark:text-gray-100 text-gray-600">Запомнить меня</label>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                <button type="submit" class="w-full dark:bg-gray-700 bg-red-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
                     Войти
                 </button>
 
@@ -59,5 +59,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/hide-show.js?v=1.0.4') }}"></script>
+    <script src="{{ asset('js/hide-show.js') }}"></script>
 @endpush
