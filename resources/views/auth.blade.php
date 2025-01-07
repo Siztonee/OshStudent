@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="flex items-center justify-center mt-4">
+    <div class="flex items-center justify-center my-8">
         <div class="dark:bg-gray-800 bg-white p-8 rounded-lg shadow-md w-full max-w-md">
             <h2 class="text-3xl font-bold text-center dark:text-gray-100 text-red-600 mb-6">Вход</h2>
 

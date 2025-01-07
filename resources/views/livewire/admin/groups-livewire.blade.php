@@ -1,6 +1,6 @@
 @section('title') Группы @endsection
 
-<div class="min-h-screen bg-gray-100">
+<div class="min-h-screen dark:bg-gray-800 bg-gray-100">
     <div class="p-4 sm:p-6 lg:p-8">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-3xl font-bold mb-6">Список групп</h1>
@@ -16,7 +16,7 @@
             
             <div class="mb-6">
                 <div class="relative">
-                    <input type="text" id="search-input" placeholder="Поиск группы..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="search-input" placeholder="Поиск группы..." class="w-full pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600 dark:text-gray-200 dark:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
@@ -26,12 +26,12 @@
             <div id="groups-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($groups as $group)
                     @if ($group && $group['curator'] && $group['headman'])
-                        <div class="group-item bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-                            <a href="{{ route('admins.group', $group['id']) }}">
+                        <div class="group-item dark:bg-gray-700 bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+                            <a href="{{ route('admins.group', $group['id']) }}" class="dark:text-gray-200 text-gray-600">
                                 <h3 class="text-lg font-semibold">{{ $group['name'] }}</h3>
-                                <p class="text-sm text-gray-600">Куратор: {{ $group['curator']['first_name'] }}</p>
-                                <p class="text-sm text-gray-600">Староста: {{ $group['headman']['first_name'] }}</p>
-                                <p class="text-sm text-gray-600">Студентов: {{ count($group['users']) }}</p>
+                                <p class="text-sm">Куратор: {{ $group['curator']['first_name'] }}</p>
+                                <p class="text-sm">Староста: {{ $group['headman']['first_name'] }}</p>
+                                <p class="text-sm">Студентов: {{ count($group['users']) }}</p>
                             </a>
                         </div>
                     @else
