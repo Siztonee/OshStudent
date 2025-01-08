@@ -32,7 +32,7 @@ function createGradeInput(cell) {
     const container = document.getElementById('grade-input-container');
     const input = document.createElement('input');
     input.type = 'text';
-    input.classList.add('relative', 'w-16', 'h-8', 'text-center', 'border', 'rounded', 'focus:outline-none', 'focus:ring-2', 'focus:ring-red-500', 'z-50');
+    input.classList.add('relative', 'w-16', 'h-8', 'text-center', 'border', 'rounded', 'focus:outline-none', 'focus:ring-2', 'focus:ring-red-500', 'z-50', 'dark:bg-gray-800', 'dark:text-gray-100');
     input.value = cell.textContent.trim();
     input.dataset.studentId = cell.dataset.studentId;
     input.dataset.subjectId = cell.dataset.subjectId;

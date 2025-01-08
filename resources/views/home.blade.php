@@ -13,12 +13,12 @@
                     class="w-32 h-32 md:w-48 md:h-48 rounded-full mx-auto mb-4 md:mb-8"
                 >
                 <h1 class="text-xl md:text-2xl font-bold text-center dark:text-gray-100 text-red-800 mb-4">
-                    {{ auth()->user()->last_name . ' ' . auth()->user()->first_name . ' ' . auth()->user()->middle_name }}
+                    {{ auth()->user()->getFullName() }}
                 </h1>
                 <div class="text-base md:text-lg text-center dark:text-gray-200 text-red-600">
                     @can('has-role', ['student'])
                         <p class="mb-2">Группа: {{ auth()->user()->group->name }}</p>
-                        <p>Курс: {{ auth()->user()->year_of_study }}</p>
+                        <p>Курс: {{ auth()->user()->group->course }}</p>
                     @elsecan('has-role', ['teacher'])
                         <p>Куратор группы: {{ auth()->user()->group->name ?? 'Отсутствует' }}</p>
                     @endcan

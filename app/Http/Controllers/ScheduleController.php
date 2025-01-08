@@ -12,10 +12,10 @@ class ScheduleController extends Controller
     {
         switch (Auth::user()->role) {
             case 'student':
-                $schedules = Schedule::where('group_id', $user->group->id)->get();
+                $schedules = Schedule::where('group_id', Auth::user()->group->id)->get();
                 break;
             case 'teacher':
-                $schedules = Schedule::where('teacher_id', $user->id)->get();
+                $schedules = Schedule::where('teacher_id', Auth::user()->id)->get();
                 break;
             case 'admin':
                 $schedules = Schedule::all();

@@ -6,14 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TeacherInfoController extends Controller
+class StudentInfoController extends Controller
 {
-    public function index(User $teacher)
+    public function index(User $student)
     {
-        if ($teacher->role !== 'teacher') {
+        if ($student->role !== 'student') {
             return abort(403, 'Не найдено');
         }
-        
-        return view('admin.teacher-info', compact('teacher'));
+
+        return view('admin.student-info', compact('student'));
     }
 }

@@ -16,7 +16,7 @@ class StudentsMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role != 'students' || 'admin') {
+        if (Auth::user()->role !== 'student') {
             return back();
         }
 
