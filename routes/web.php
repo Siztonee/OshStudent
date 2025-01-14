@@ -15,6 +15,7 @@ use App\Http\Middleware\TeachersMiddleware;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ShowGradesController;
 use App\Http\Controllers\HealthCheckController;
 use App\Http\Controllers\Teachers\MarksController;
 use App\Http\Controllers\Teachers\GradesController;
@@ -35,7 +36,8 @@ Route::middleware(AuthMiddleware::class)->group(function () {
 });
 
 Route::middleware([AuthMiddleware::class, StudentsMiddleware::class])->group(function () {
-    Route::get('/health-check', [HealthCheckController::class, 'index'])->name('health_check');
+    Route::get('/health-check', [HealthCheckController::class, 'index'])->name('studs.health.check');
+    Route::get('/grades', ShowGradesController::class)->name('studs.grades.show');
 });
 
 Route::middleware([AuthMiddleware::class, TeachersMiddleware::class])->group(function () {

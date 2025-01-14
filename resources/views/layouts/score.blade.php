@@ -1,10 +1,7 @@
 <div class="p-4 md:p-8 w-full">
     <div class="w-full">
-        <!-- Изменен gap и добавлен padding для предотвращения обрезки -->
         <div class="flex flex-col sm:flex-row justify-between gap-4 md:gap-2 px-2">
-            <!-- Average Grade -->
             <div class="text-center flex-1">
-                <!-- Скорректированы размеры графиков -->
                 <div class="relative inline-block w-40 h-40 md:w-56 md:h-56">
                     @php
                         $averageGrade = 5;
@@ -36,9 +33,7 @@
                 <p class="mt-2 md:mt-4 text-base md:text-lg font-medium">Средний балл</p>
             </div>
             
-            <!-- Attendance -->
             <div class="text-center flex-1">
-                <!-- Скорректированы размеры графиков -->
                 <div class="relative inline-block w-40 h-40 md:w-56 md:h-56">
                     @php
                         $attendance = 35;

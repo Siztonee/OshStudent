@@ -26,6 +26,7 @@ class SemesterGradeRequest extends FormRequest
             'subject_id' => 'required|exists:subjects,id',
             'teacher_id' => 'required|exists:users,id',
             'semester' => 'required|integer|in:1,2',
+            'session' => 'required|integer|in:1,2,3',
             'grade' => 'required|integer|min:1|max:5',
         ];
     }

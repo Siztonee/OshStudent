@@ -20,6 +20,7 @@ class SemesterGradeController extends Controller
                 'subject_id' => $validated['subject_id'],
                 'teacher_id' => $validated['teacher_id'],
                 'semester' => $validated['semester'],
+                'session' => $validated['session'],
                 'year' => now()->year,
             ],
             ['grade' => $validated['grade']]

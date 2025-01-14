@@ -47,7 +47,8 @@ class SemesterGradeLivewire extends Component
             ->where('subject_id', $this->subjectId)
             ->get()
             ->groupBy('student_id')
-            ->collect();
+            ->map->keyBy('session');
+        
     }
 
     public function updatedSelectedSemester($value)

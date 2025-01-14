@@ -32,6 +32,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('grade');
             $table->unsignedSmallInteger('year');
             $table->enum('semester', [1, 2]);
+            $table->enum('session', [1, 2, 3]);
 
             $table->timestamps();
         });

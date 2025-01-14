@@ -17,8 +17,8 @@
                     @endcan
 
                     @can('has-role', ['student'])
-                        <li><a href="#" class="hover:text-red-200">Семестр</a></li>
-                        <li><a href="{{ route('health_check') }}" class="hover:text-red-200">Медосмотр</a></li>
+                        <li><a href="{{ route('studs.grades.show') }}" class="hover:text-red-200">Семестр</a></li>
+                        <li><a href="{{ route('studs.health.check') }}" class="hover:text-red-200">Медосмотр</a></li>
                     @endcan
                     <li><a href="{{ route('schedule') }}" class="hover:text-red-200">Расписание</a></li>
                     <li><a href="{{ route('settings') }}" class="hover:text-red-200">Настройки</a></li>
@@ -31,8 +31,8 @@
                     @endcan
 
                     @can('has-role', ['student'])
-                        <li><a href="#" class="block py-2 px-4 hover:bg-red-700 dark:hover:bg-gray-700">Семестр</a></li>
-                        <li><a href="{{ route('health_check') }}" class="block py-2 px-4 hover:bg-red-700 dark:hover:bg-gray-700">Медосмотр</a></li>
+                        <li><a href="{{ route('studs.grades.show') }}" class="block py-2 px-4 hover:bg-red-700 dark:hover:bg-gray-700">Семестр</a></li>
+                        <li><a href="{{ route('studs.health.check') }}" class="block py-2 px-4 hover:bg-red-700 dark:hover:bg-gray-700">Медосмотр</a></li>
                     @endcan
                     <li><a href="{{ route('schedule') }}" class="block py-2 px-4 hover:bg-red-700 dark:hover:bg-gray-700">Расписание</a></li>
                     <li><a href="{{ route('settings') }}" class="block py-2 px-4 hover:bg-red-700 dark:hover:bg-gray-700">Настройки</a></li>

@@ -29,7 +29,6 @@ return new class extends Migration
             $table->unsignedInteger('score')->default(0);
 
             $table->enum('role', ['student', 'teacher', 'admin'])->default('student');
-            $table->enum('theme', ['light', 'dark'])->default('light');
 
             $table->string('specialization')->nullable();
 

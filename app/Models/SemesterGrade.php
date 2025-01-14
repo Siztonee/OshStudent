@@ -15,7 +15,8 @@ class SemesterGrade extends Model
         'subject_id',
         'grade',
         'semester',
-        'year'
+        'year',
+        'session'
     ];
 
 

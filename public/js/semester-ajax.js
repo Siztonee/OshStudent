@@ -32,12 +32,13 @@ function createGradeInput(cell) {
     const container = document.getElementById('grade-input-container');
     const input = document.createElement('input');
     input.type = 'text';
-    input.classList.add('relative', 'w-16', 'h-8', 'text-center', 'border', 'rounded', 'focus:outline-none', 'focus:ring-2', 'focus:ring-red-500', 'z-50');
+    input.classList.add('relative', 'w-16', 'h-8', 'text-center', 'border', 'rounded', 'focus:outline-none', 'focus:ring-2', 'focus:ring-red-500', 'z-50', 'dark:bg-gray-800', 'dark:text-gray-100');
     input.value = cell.textContent.trim();
     input.dataset.studentId = cell.dataset.studentId;
     input.dataset.subjectId = cell.dataset.subjectId;
     input.dataset.teacherId = cell.dataset.teacherId;
     input.dataset.semester = cell.dataset.semester;
+    input.dataset.session = cell.dataset.session;
     input.addEventListener('change', onGradeInputChange);
     input.addEventListener('blur', onGradeInputBlur);
     container.innerHTML = '';
@@ -59,16 +60,17 @@ function onGradeInputChange(event) {
     const subjectId = input.dataset.subjectId;
     const teacherId = input.dataset.teacherId;
     const semester = input.dataset.semester;
+    const session = input.dataset.session;
     const grade = input.value;
 
-    updateGrade(studentId, subjectId, teacherId, semester, grade);
+    updateGrade(studentId, subjectId, teacherId, semester, session, grade);
 }
 
 function onGradeInputBlur(event) {
     removeGradeInput();
 }
 
-function updateGrade(studentId, subjectId, teacherId, semester, grade) {
+function updateGrade(studentId, subjectId, teacherId, semester, session, grade) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     console.log('Sending request:', {
@@ -76,6 +78,7 @@ function updateGrade(studentId, subjectId, teacherId, semester, grade) {
         subject_id: subjectId,
         teacher_id: teacherId,
         semester: semester,
+        session: session,
         grade: grade
     });
 
@@ -90,6 +93,7 @@ function updateGrade(studentId, subjectId, teacherId, semester, grade) {
             subject_id: subjectId,
             teacher_id: teacherId,
             semester: semester,
+            session: session,
             grade: grade
         })
     })
@@ -105,7 +109,7 @@ function updateGrade(studentId, subjectId, teacherId, semester, grade) {
     .then(data => {
         console.log('Parsed data:', data);
         if (data.success) {
-            const cell = document.querySelector(`.grade-cell[data-student-id="${studentId}"][data-semester="${semester}"]`);
+            const cell = document.querySelector(`.grade-cell[data-student-id="${studentId}"][data-semester="${semester}"][data-session="${session}"]`);
             if (cell) {
                 cell.textContent = grade;
             }

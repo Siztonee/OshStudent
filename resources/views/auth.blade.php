@@ -24,15 +24,15 @@
 
 
                 <div class="mb-4">
-                    <label for="email" class="block dark:text-gray-100 text-gray-700 text-sm font-bold mb-2">Логин:</label>
-                    <input type="text" id="login" name="login" class="w-full px-3 py-2 border dark:border-gray-600 border-gray-300 rounded-md text-gray-600" required>
+                    <label for="login" class="block dark:text-gray-100 text-gray-700 text-sm font-bold mb-2">Логин:</label>
+                    <input type="text" id="login" name="login" class="w-full dark:bg-gray-700 dark:text-gray-100 px-3 py-2 border dark:border-gray-600 border-gray-300 rounded-md text-gray-600" required>
                 </div>
 
                 <div class="mb-6 relative">
                     <label for="password" class="block dark:text-gray-100 text-gray-700 text-sm font-bold mb-2">Пароль:</label>
                     <div class="relative">
-                        <input type="password" id="password" name="password" class="w-full px-4 py-2 pr-10 border dark:border-gray-600 border-gray-300 rounded-md text-gray-600" required>
-                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-gray-600 focus:outline-none hsPassword">
+                        <input type="password" id="password" name="password" class="w-full dark:bg-gray-700 dark:text-gray-100 px-4 py-2 pr-10 border dark:border-gray-600 border-gray-300 rounded-md text-gray-600" required>
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 dark:text-gray-200 text-gray-600 focus:outline-none hsPassword">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
